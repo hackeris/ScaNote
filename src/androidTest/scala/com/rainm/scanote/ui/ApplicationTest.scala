@@ -1,4 +1,4 @@
-package com.rainm.scala.android
+package com.rainm.scala.ui
 
 import android.test.AndroidTestCase
 

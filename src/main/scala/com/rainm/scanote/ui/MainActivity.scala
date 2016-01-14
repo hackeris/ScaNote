@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.rainm.scala.android
+package com.rainm.scanote.ui
 
-import android.app.Activity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.rainm.scanote.{R, TR, TypedFindView}
 
-class SampleActivity extends Activity with TypedFindView {
+class MainActivity extends AppCompatActivity with TypedFindView {
 
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)

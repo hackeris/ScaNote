@@ -22,6 +22,11 @@ resolvers ++= Seq(Resolver.mavenLocal,
   Resolver.sonatypeRepo("snapshots"),
   Resolver.defaultLocal)
 
+libraryDependencies ++= Seq(
+  "com.android.support" % "appcompat-v7" % "22.2.1",
+  "com.android.support" % "design" % "22.2.1"
+)
+
 // Override the run task with the android:run
 run <<= run in Android
 
@@ -33,6 +38,6 @@ proguardOptions in Android ++= Seq(
   "-ignorewarnings",
   "-keep class scala.Dynamic")
 
-javacOptions ++= Seq("-source", "1.7","-target", "1.7")
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 scalacOptions += "-target:jvm-1.7"
