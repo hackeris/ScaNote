@@ -22,8 +22,8 @@ class SearchActivity extends AppCompatActivity with TypedFindView {
 
     val toolbar = findView(TR.toolbar)
     setSupportActionBar(toolbar)
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true)
-    getSupportActionBar().setDisplayShowHomeEnabled(true)
+    getSupportActionBar.setDisplayHomeAsUpEnabled(true)
+    getSupportActionBar.setDisplayShowHomeEnabled(true)
     toolbar.setNavigationOnClickListener(new OnClickListener {
       override def onClick(v: View): Unit = {
         finish()
