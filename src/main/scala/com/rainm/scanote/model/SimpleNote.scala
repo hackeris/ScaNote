@@ -8,6 +8,11 @@ class SimpleNote(var title: String, var content: String) {
   var id: Int = 0
   var last_updated: String = null
 
+  def this(_id: Int, title: String, content: String) = {
+    this(title, content)
+    id = _id
+  }
+
   override def equals(other: Any): Boolean = {
     val ano: SimpleNote = other.asInstanceOf[SimpleNote]
     content.equals(ano.content) && title.equals(ano.title)

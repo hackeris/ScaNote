@@ -6,9 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.text.{Editable, TextWatcher}
 import android.view.{MenuItem, Menu}
 import android.widget.EditText
 import com.rainm.scanote.{TR, R, TypedFindView}
+import us.feras.mdv.MarkdownView
 
 /**
   * Created by hackeris on 16/1/14.
@@ -24,6 +26,8 @@ class EditNoteActivity extends AppCompatActivity with TypedFindView {
   lazy val title = findViewById(R.id.text_note_title).asInstanceOf[EditText]
   lazy val content = findViewById(R.id.text_note_content).asInstanceOf[EditText]
 
+  lazy val markdownView = findViewById(R.id.markdown_note_preview).asInstanceOf[MarkdownView]
+
   override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.edit_note)
@@ -33,6 +37,14 @@ class EditNoteActivity extends AppCompatActivity with TypedFindView {
     val intent = getIntent
     title.setText(intent.getStringExtra(EditNoteActivity.NOTE_TITLE_KEY))
     content.setText(intent.getStringExtra(EditNoteActivity.NOTE_CONTENT_KEY))
+    
+    content.addTextChangedListener(new TextWatcher {
+      override def beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int): Unit = {}
+
+      override def onTextChanged(s: CharSequence, start: Int, before: Int, count: Int): Unit = updateMarkdownView()
+
+      override def afterTextChanged(s: Editable): Unit = updateMarkdownView()
+    })
   }
 
   override def onCreateOptionsMenu(menu: Menu): Boolean = {
@@ -42,6 +54,10 @@ class EditNoteActivity extends AppCompatActivity with TypedFindView {
 
   def validateNote(): Boolean = {
     title.getText.toString.isEmpty
+  }
+
+  def updateMarkdownView(): Unit = {
+    markdownView.loadMarkdown(content.getText.toString)
   }
 
   override def onOptionsItemSelected(item: MenuItem): Boolean = {

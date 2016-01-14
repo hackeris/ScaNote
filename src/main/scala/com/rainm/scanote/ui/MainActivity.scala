@@ -71,7 +71,12 @@ class MainActivity extends AppCompatActivity with TypedFindView {
   }
 
   def onNoteItemClick(parent: AdapterView[_], view: View, position: Int, id: Long): Unit = {
-
+    val intent = new Intent(MainActivity.this, classOf[ViewNoteActivity])
+    val note = notes.get(position)
+    intent.putExtra(ViewNoteActivity.KEY_NOTE_ID, String.valueOf(note.id))
+    intent.putExtra(ViewNoteActivity.KEY_NOTE_TITLE, note.title)
+    intent.putExtra(ViewNoteActivity.KEY_NOTE_CONTENT, note.content)
+    startActivity(intent)
   }
 
   override def onCreateOptionsMenu(menu: Menu): Boolean = {
