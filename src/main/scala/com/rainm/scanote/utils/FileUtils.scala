@@ -1,6 +1,6 @@
 package com.rainm.scanote.utils
 
-import java.io.{FileInputStream, File}
+import java.io.{FileOutputStream, FileInputStream, File}
 
 import android.os.Environment
 
@@ -27,7 +27,18 @@ object FileUtils {
       val fileLength = fis.available()
       val buffer = new Array[Byte](fileLength)
       fis.read(buffer)
+      fis.close()
       new String(buffer, "UTF-8")
     }
+  }
+
+  def writeStringToFile(path: String, content: String): Unit = {
+    val file = new File(path)
+    if (!file.exists()) {
+      file.createNewFile()
+    }
+    val fos = new FileOutputStream(file)
+    fos.write(content.getBytes())
+    fos.close()
   }
 }
