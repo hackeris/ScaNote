@@ -18,13 +18,16 @@ package com.rainm.scanote.ui
 
 import java.util
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.{Snackbar, FloatingActionButton}
 import android.support.v7.app.AppCompatActivity
 import android.view.{MenuItem, Menu, View}
 import android.view.View.OnClickListener
-import android.widget.ListView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.{AdapterView, ListView}
+import com.rainm.scanote.db.DBManager
 import com.rainm.scanote.model.SimpleNote
 import com.rainm.scanote.{TR, R, TypedFindView}
 
@@ -46,6 +49,7 @@ class MainActivity extends AppCompatActivity with TypedFindView {
     setContentView(R.layout.main)
 
     initView()
+    reloadNoteList()
   }
 
   def initView(): Unit = {
@@ -58,6 +62,16 @@ class MainActivity extends AppCompatActivity with TypedFindView {
           MainActivity.REQUEST_NOTE_CONTENT)
       }
     })
+    noteListView.setOnItemClickListener(new OnItemClickListener {
+      override def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long): Unit = {
+        onNoteItemClick(parent, view, position, id)
+      }
+    })
+    noteListView.setAdapter(listAdapter)
+  }
+
+  def onNoteItemClick(parent: AdapterView[_], view: View, position: Int, id: Long): Unit = {
+
   }
 
   override def onCreateOptionsMenu(menu: Menu): Boolean = {
@@ -76,4 +90,42 @@ class MainActivity extends AppCompatActivity with TypedFindView {
     super.onOptionsItemSelected(item)
   }
 
+  def refreshNoteList(): Unit = {
+    listAdapter.notifyDataSetChanged()
+  }
+
+  def reloadNoteList(): Unit = {
+    val db = new DBManager(this)
+    notes = db.queryAllSimpleNotes()
+    db.close()
+    listAdapter.setNotes(notes)
+    listAdapter.notifyDataSetChanged()
+  }
+
+  override def onActivityResult(request: Int, result: Int, data: Intent): Unit = {
+    request match {
+      case MainActivity.REQUEST_NOTE_CONTENT => {
+        if (result == Activity.RESULT_OK) {
+          Snackbar.make(addButton, "succeed to add note", Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show()
+
+          val note = new SimpleNote(data.getStringExtra(EditNoteActivity.NOTE_TITLE_KEY),
+            data.getStringExtra(EditNoteActivity.NOTE_CONTENT_KEY))
+          notes.add(note)
+
+          val db = new DBManager(this)
+          db.addSimpleNote(note)
+          db.close()
+
+          reloadNoteList()
+        }
+      }
+      case _ =>
+    }
+  }
+
+  override def onResume(): Unit = {
+    reloadNoteList()
+    super.onResume()
+  }
 }

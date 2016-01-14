@@ -67,7 +67,7 @@ class DBManager(context: Context) {
   }
 
   def queryAllCursor(): Cursor = {
-    db.rawQuery("SELECT * FROM note ORDER BY last_updated", null)
+    db.rawQuery("SELECT * FROM note ORDER BY last_updated DESC", null)
   }
 
   def close(): Unit = {
