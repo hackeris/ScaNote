@@ -78,10 +78,10 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                <!--<us.feras.mdv.MarkdownView-->
-                        <!--android:id="@+id/markdown_note_preview"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="fill_parent" />-->
+                <us.feras.mdv.MarkdownView
+                        android:id="@+id/markdown_note_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent" />
             </LinearLayout>
 
         </LinearLayout>
