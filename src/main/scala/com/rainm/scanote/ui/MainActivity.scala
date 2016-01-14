@@ -86,7 +86,9 @@ class MainActivity extends AppCompatActivity with TypedFindView {
 
   override def onOptionsItemSelected(item: MenuItem): Boolean = {
     item.getItemId match {
-      case R.id.action_search =>
+      case R.id.action_search => {
+        startActivity(new Intent(this, classOf[SearchActivity]))
+      }
       case R.id.action_export =>
       case R.id.action_import =>
       case R.id.action_settings =>
