@@ -10,9 +10,4 @@ class ApplicationTest extends AndroidTestCase {
 
   def ApplicationTest(): Unit = {
   }
-
-  def testDemo(): Unit = {
-    assert(true)
-  }
-
 }

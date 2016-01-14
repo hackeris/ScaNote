@@ -9,7 +9,11 @@ import com.rainm.scanote.model.SimpleNote
   */
 object DBHelper {
   val DB_VERSION = 0x1
-  val DB_NAME = "action_note_db"
+  var DB_NAME = "action_note_db"
+
+  def setDbName(dbName: String): Unit = {
+    DB_NAME = dbName
+  }
 }
 
 class DBHelper(context: Context)

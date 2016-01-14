@@ -3,7 +3,7 @@ package com.rainm.scanote.model
 /**
   * Created by hackeris on 16/1/14.
   */
-class SimpleNote(val title: String, val content: String) {
+class SimpleNote(var title: String, var content: String) {
 
   var id: Int = 0
   var last_updated: String = null

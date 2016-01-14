@@ -117,6 +117,15 @@
 # view res/layout/design_navigation_menu.xml #generated:17
 -keep class android.support.design.internal.NavigationMenuView { <init>(...); }
 
+# view res/layout/main.xml #generated:10
+-keep class android.support.design.widget.AppBarLayout { <init>(...); }
+
+# view res/layout/main.xml #generated:2
+-keep class android.support.design.widget.CoordinatorLayout { <init>(...); }
+
+# view res/layout/main.xml #generated:26
+-keep class android.support.design.widget.FloatingActionButton { <init>(...); }
+
 # view res/layout/layout_snackbar.xml #generated:18
 # view sw600dp-v13/res/layout-sw600dp-v13/layout_snackbar.xml #generated:18
 -keep class android.support.design.widget.Snackbar$SnackbarLayout { <init>(...); }
@@ -182,13 +191,19 @@
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
 # view res/layout/abc_screen_toolbar.xml #generated:36
+# view res/layout/main.xml #generated:15
 -keep class android.support.v7.widget.Toolbar { <init>(...); }
 
-# view AndroidManifest.xml #generated:16
+# view AndroidManifest.xml #generated:17
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
 
+# view AndroidManifest.xml #generated:14
+-keep class com.rainm.scanote.ui.EditNoteActivity { <init>(...); }
+
 # view AndroidManifest.xml #generated:7
--keep class com.rainm.scala.scanote.MainActivity { <init>(...); }
+-keep class com.rainm.scanote.ui.MainActivity { <init>(...); }
 
 -ignorewarnings
 -keep class scala.Dynamic
+-keep class android.support.design.widget.** { *; }
+-keep interface android.support.design.widget.** { *; }

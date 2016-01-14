@@ -16,16 +16,64 @@
 
 package com.rainm.scanote.ui
 
+import java.util
+
+import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
-import com.rainm.scanote.{R, TR, TypedFindView}
+import android.view.{MenuItem, Menu, View}
+import android.view.View.OnClickListener
+import android.widget.ListView
+import com.rainm.scanote.model.SimpleNote
+import com.rainm.scanote.{TR, R, TypedFindView}
+
+object MainActivity {
+  val REQUEST_NOTE_CONTENT = 0x1
+}
 
 class MainActivity extends AppCompatActivity with TypedFindView {
+
+  lazy val noteListView: ListView = findView(TR.list_notes)
+  lazy val addButton: FloatingActionButton = findView(TR.fab)
+
+  lazy val listAdapter: NotesListAdapter = new NotesListAdapter(this)
+
+  var notes: util.List[SimpleNote] = null
 
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(R.layout.main)
-    findView(TR.textview).setText(R.string.hello_world)
+
+    initView()
+  }
+
+  def initView(): Unit = {
+
+    setSupportActionBar(findView(TR.toolbar))
+    addButton.setOnClickListener(new OnClickListener {
+      override def onClick(v: View): Unit = {
+        startActivityForResult(
+          new Intent(MainActivity.this, classOf[EditNoteActivity]),
+          MainActivity.REQUEST_NOTE_CONTENT)
+      }
+    })
+  }
+
+  override def onCreateOptionsMenu(menu: Menu): Boolean = {
+    getMenuInflater.inflate(R.menu.menu_main, menu)
+    true
+  }
+
+  override def onOptionsItemSelected(item: MenuItem): Boolean = {
+    item.getItemId match {
+      case R.id.action_search =>
+      case R.id.action_export =>
+      case R.id.action_import =>
+      case R.id.action_settings =>
+      case _ =>
+    }
+    super.onOptionsItemSelected(item)
   }
 
 }

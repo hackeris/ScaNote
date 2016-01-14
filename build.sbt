@@ -36,7 +36,9 @@ useProguard in Android := true
 
 proguardOptions in Android ++= Seq(
   "-ignorewarnings",
-  "-keep class scala.Dynamic")
+  "-keep class scala.Dynamic",
+  "-keep class android.support.design.widget.** { *; }",
+  "-keep interface android.support.design.widget.** { *; }")
 
 javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
