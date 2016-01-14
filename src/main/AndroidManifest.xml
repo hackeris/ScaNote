@@ -24,7 +24,8 @@
             android:minSdkVersion="14"
             android:targetSdkVersion="22"/>
 
-    <application android:theme="@style/AppTheme">
+    <application android:theme="@style/AppTheme"
+                 android:icon="@drawable/ic_create_blue">
 
         <activity
                 android:label="@string/app_name"
