@@ -66,6 +66,19 @@ class DBManager(context: Context) {
     notes
   }
 
+  def searchForSimpleNote(keyWord: String): util.List[SimpleNote] = {
+    queryCursorToNotes({
+      if (keyWord.isEmpty) {
+        queryAllCursor()
+      } else {
+        db.rawQuery("SELECT * FROM " + SimpleNote.TABLE_NAME + " "
+          + "WHERE title like '%" + keyWord + "%' " +
+          "OR content LIKE '%" + keyWord + "%'",
+          null)
+      }
+    })
+  }
+
   def queryAllCursor(): Cursor = {
     db.rawQuery("SELECT * FROM note ORDER BY last_updated DESC", null)
   }

@@ -57,6 +57,12 @@ class DBManagerTest extends AndroidTestCase {
     assert(manager.queryAllSimpleNotes().size() == 1)
   }
 
+  def testSearchForNote(): Unit = {
+
+    assert(manager.searchForSimpleNote("title 2").size() == 1)
+    assert(manager.searchForSimpleNote("title").size() == 2)
+  }
+
   override def tearDown(): Unit = {
     manager.close()
     super.tearDown()
