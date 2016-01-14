@@ -26,6 +26,13 @@ class DBManager(context: Context) {
     }
   }
 
+  def addSimpleNotes(notes: util.List[SimpleNote]): Unit = {
+    val length = notes.size()
+    for (i <- 0 to length - 1) {
+      addSimpleNote(notes.get(i))
+    }
+  }
+
   def updateSimpleNote(note: SimpleNote): Unit = {
     val cv: ContentValues = new ContentValues()
     cv.put("title", note.title)

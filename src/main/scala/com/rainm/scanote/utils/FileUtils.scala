@@ -32,7 +32,7 @@ object FileUtils {
     }
   }
 
-  def writeStringToFile(path: String, content: String): Unit = {
+  def writeStringToFile(content: String, path: String): Unit = {
     val file = new File(path)
     if (!file.exists()) {
       file.createNewFile()

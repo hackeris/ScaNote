@@ -28,7 +28,8 @@ import android.view.View.OnClickListener
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.{AdapterView, ListView}
 import com.rainm.scanote.db.DBManager
-import com.rainm.scanote.model.SimpleNote
+import com.rainm.scanote.model.{NoteImporter, NoteExporter, SimpleNote}
+import com.rainm.scanote.utils.FileUtils
 import com.rainm.scanote.{TR, R, TypedFindView}
 
 object MainActivity {
@@ -89,8 +90,23 @@ class MainActivity extends AppCompatActivity with TypedFindView {
       case R.id.action_search => {
         startActivity(new Intent(this, classOf[SearchActivity]))
       }
-      case R.id.action_export =>
-      case R.id.action_import =>
+      case R.id.action_export => {
+        val manager = new DBManager(this)
+        NoteExporter.exportNotesToSdCard(manager.queryAllSimpleNotes(),
+          FileUtils.getSDPath + "/notes.json")
+        manager.close()
+
+        snackBarShow("Succeed to export notes")
+      }
+      case R.id.action_import => {
+        val manager = new DBManager(this)
+        manager.addSimpleNotes(
+          NoteImporter.importNotesFromSdCard(FileUtils.getSDPath + "/notes.json"))
+        manager.close()
+        reloadNoteList()
+
+        snackBarShow("Succeed to import notes")
+      }
       case R.id.action_settings =>
       case _ =>
     }
@@ -113,8 +129,7 @@ class MainActivity extends AppCompatActivity with TypedFindView {
     request match {
       case MainActivity.REQUEST_NOTE_CONTENT => {
         if (result == Activity.RESULT_OK) {
-          Snackbar.make(addButton, "succeed to add note", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
+          snackBarShow("succeed to add note")
 
           val note = new SimpleNote(data.getStringExtra(EditNoteActivity.NOTE_TITLE_KEY),
             data.getStringExtra(EditNoteActivity.NOTE_CONTENT_KEY))
@@ -134,5 +149,10 @@ class MainActivity extends AppCompatActivity with TypedFindView {
   override def onResume(): Unit = {
     reloadNoteList()
     super.onResume()
+  }
+
+  def snackBarShow(content: String): Unit = {
+    Snackbar.make(addButton, content, Snackbar.LENGTH_LONG)
+      .setAction("Action", null).show()
   }
 }
