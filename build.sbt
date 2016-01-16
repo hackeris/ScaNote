@@ -4,7 +4,7 @@ android.Plugin.androidBuild
 platformTarget in Android := "android-22"
 
 // Application Name
-name := """scala-android"""
+name := """scanote"""
 
 // Application Version
 version := "1.0.0"
