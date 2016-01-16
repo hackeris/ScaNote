@@ -39,8 +39,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- android:windowSoftInputMode="adjustPan|stateHidden" -->
         <activity android:name=".ui.EditNoteActivity"
-                  android:windowSoftInputMode="adjustPan|stateHidden"
                   android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.ViewNoteActivity"/>
         <activity android:name=".ui.SearchActivity"

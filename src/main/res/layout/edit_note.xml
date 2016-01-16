@@ -57,11 +57,11 @@
                       android:layout_below="@+id/label_content"
                       android:orientation="vertical">
 
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+            <!--<LinearLayout-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="fill_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal">-->
 
                 <EditText
                         android:id="@+id/text_note_content"
@@ -70,19 +70,19 @@
                         android:ems="10"
                         android:gravity="top"
                         android:inputType="textMultiLine" />
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+            <!--<LinearLayout-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="fill_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="vertical">-->
 
-                <us.feras.mdv.MarkdownView
-                        android:id="@+id/markdown_note_preview"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent" />
-            </LinearLayout>
+                <!--<us.feras.mdv.MarkdownView-->
+                        <!--android:id="@+id/markdown_note_preview"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="fill_parent" />-->
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 
