@@ -9,7 +9,7 @@ import android.os.Environment
   */
 object FileUtils {
   def getSDPath: String = {
-    val sdCardExist = Environment.getExternalStorageState()
+    val sdCardExist = Environment.getExternalStorageState
       .equals(Environment.MEDIA_MOUNTED)
     if (sdCardExist) {
       Environment.getExternalStorageDirectory.toString
@@ -38,7 +38,7 @@ object FileUtils {
       file.createNewFile()
     }
     val fos = new FileOutputStream(file)
-    fos.write(content.getBytes())
+    fos.write(content.getBytes)
     fos.close()
   }
 }
